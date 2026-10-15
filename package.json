@@ -15,7 +15,8 @@
     "lint:stylelint": "stylelint --ignore-path .gitignore '**/*.css'",
     "lint:typescript": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -37,7 +38,9 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^9.1.7",
     "jsdom": "^22.1.0",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.2.4",
     "stylelint": "^15.10.2",
     "stylelint-config-clean-order": "^5.0.1",
@@ -48,5 +51,16 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,html,yml}": "prettier --write"
+  }
 }
