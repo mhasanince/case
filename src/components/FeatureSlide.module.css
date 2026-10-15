@@ -17,6 +17,8 @@
   padding: 0 24px;
 
   text-align: center;
+
+  animation: fade-in 300ms ease-out both;
 }
 
 .eyebrow {
@@ -61,6 +63,8 @@
 }
 
 .stage {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
   position: relative;
 
   overflow: hidden;
@@ -69,6 +73,10 @@
   aspect-ratio: 610 / 483;
   width: min(399px, 100% + 24px);
   margin-top: auto;
+}
+
+.stage[data-ready='false'] * {
+  animation-play-state: paused;
 }
 
 .phone,
@@ -81,9 +89,52 @@
   height: auto;
 }
 
+.phone {
+  animation: rise-in 700ms var(--ease-out) 150ms both;
+}
+
 .decorations {
   position: absolute;
   inset: 0;
+}
+
+.decoration {
+  animation-duration: 400ms;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+  animation-delay: 850ms;
+}
+
+.decoration:nth-child(2) {
+  animation-delay: 1050ms;
+}
+
+.decoration:nth-child(3) {
+  animation-delay: 1250ms;
+}
+
+.decoration:nth-child(4) {
+  animation-delay: 1450ms;
+}
+
+.pop {
+  animation-name: pop-in;
+}
+
+.slide-up {
+  animation-name: slide-up-in;
+}
+
+.float-up {
+  animation-name: float-up-in;
+}
+
+.reveal-left {
+  animation-name: reveal-left-in;
+}
+
+.reveal-right {
+  animation-name: reveal-right-in;
 }
 
 @media (width >= 768px) {
@@ -138,5 +189,58 @@
 
   .stage {
     align-self: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone,
+  .decoration {
+    animation-name: fade-in;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up-in {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+@keyframes float-up-in {
+  from {
+    transform: translateY(40%);
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-left-in {
+  from {
+    transform: translateX(60%);
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-right-in {
+  from {
+    transform: translateX(-60%);
+    opacity: 0;
   }
 }

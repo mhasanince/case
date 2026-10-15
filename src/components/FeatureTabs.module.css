@@ -11,12 +11,6 @@
   box-shadow: inset 0 -1px rgb(0 0 0 / 8%);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tablist {
-    scroll-behavior: auto;
-  }
-}
-
 .tablist::-webkit-scrollbar {
   display: none;
 }
@@ -42,6 +36,8 @@
 
   background-color: transparent;
   border: 0;
+
+  transition: background-color 300ms ease-out;
 }
 
 .tab + .tab {
@@ -70,6 +66,8 @@
 
   border: 1px solid rgb(0 0 0 / 8%);
   border-radius: 50%;
+
+  transition: background-color 300ms ease-out;
 }
 
 .tab[aria-selected='true'] .badge {
@@ -81,6 +79,8 @@
   height: 32px;
 
   background-color: #666;
+
+  transition: background-color 300ms ease-out;
 
   mask-position: center;
   mask-repeat: no-repeat;
@@ -100,6 +100,8 @@
   stroke: #0381ff;
   stroke-dasharray: 173;
   stroke-dashoffset: 173;
+
+  transition: stroke-dashoffset 500ms ease-in-out;
 }
 
 .tab[aria-selected='true'] .ring {
@@ -123,5 +125,15 @@
     display: grid;
     grid-template-columns: repeat(4, 300px) 240px;
     justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tablist {
+    scroll-behavior: auto;
+  }
+
+  .ring {
+    transition: none;
   }
 }

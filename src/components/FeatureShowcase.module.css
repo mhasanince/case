@@ -3,6 +3,14 @@
   background-color: #fff;
 }
 
+.panel {
+  transition: opacity 300ms ease-out;
+}
+
+.leaving {
+  opacity: 0;
+}
+
 @media (width >= 1200px) {
   .showcase {
     background-color: #fbfcfc;

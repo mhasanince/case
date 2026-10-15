@@ -1,6 +1,9 @@
+import { useMemo } from 'react';
 import type { CSSProperties } from 'react';
 
+import { getImageSources } from '../features';
 import type { Feature, StageImage } from '../features';
+import { useImagesReady } from '../useImagesReady';
 import styles from './FeatureSlide.module.css';
 
 type StagePosition = CSSProperties & Record<'--x' | '--y' | '--width', number>;
@@ -10,6 +13,9 @@ function getStagePosition(image: StageImage): StagePosition {
 }
 
 export function FeatureSlide({ feature }: { feature: Feature }) {
+  const imageSources = useMemo(() => getImageSources(feature), [feature]);
+  const imagesReady = useImagesReady(imageSources);
+
   return (
     <div className={styles.slide}>
       <div className={styles.text}>
@@ -24,6 +30,7 @@ export function FeatureSlide({ feature }: { feature: Feature }) {
         className={styles.stage}
         role="img"
         aria-label={feature.illustrationLabel}
+        data-ready={imagesReady}
       >
         <img
           className={styles.phone}
@@ -37,7 +44,7 @@ export function FeatureSlide({ feature }: { feature: Feature }) {
           {feature.decorations.map((decoration) => (
             <img
               key={decoration.src}
-              className={styles.decoration}
+              className={`${styles.decoration} ${styles[decoration.animation]}`}
               src={decoration.src}
               alt=""
               width={decoration.width}
