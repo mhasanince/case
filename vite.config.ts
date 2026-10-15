@@ -7,6 +7,9 @@ export default defineConfig({
     emptyOutDir: true,
   },
   css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
     postcss: {
       plugins: [autoprefixer()],
     },
