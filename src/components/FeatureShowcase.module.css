@@ -1,0 +1,10 @@
+.showcase {
+  overflow: hidden;
+  background-color: #fff;
+}
+
+@media (width >= 1200px) {
+  .showcase {
+    background-color: #fbfcfc;
+  }
+}

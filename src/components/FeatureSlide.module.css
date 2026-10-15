@@ -1,0 +1,142 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 624px;
+  padding-top: 56px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 375px;
+  margin-bottom: 20px;
+  padding: 0 24px;
+
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19px;
+  color: #0381ff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title {
+  margin: 16px 0 0;
+
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #0b122a;
+}
+
+.description {
+  margin: 13px 0 0;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.learn-more {
+  cursor: pointer;
+
+  height: 40px;
+  margin-top: 20px;
+  padding: 0 14.8px;
+
+  font: inherit;
+  font-size: 14.8px;
+  color: #0b122a;
+
+  background-color: transparent;
+  border: 0.5px solid rgb(0 0 0 / 16%);
+}
+
+.stage {
+  position: relative;
+
+  overflow: hidden;
+  flex-shrink: 0;
+
+  aspect-ratio: 610 / 483;
+  width: min(399px, 100% + 24px);
+  margin-top: auto;
+}
+
+.phone,
+.decoration {
+  position: absolute;
+  top: calc(var(--y) / 483 * 100%);
+  left: calc(var(--x) / 610 * 100%);
+
+  width: calc(var(--width) / 610 * 100%);
+  height: auto;
+}
+
+.decorations {
+  position: absolute;
+  inset: 0;
+}
+
+@media (width >= 768px) {
+  .text {
+    max-width: 604px;
+  }
+
+  .description {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: 0.8px;
+  }
+
+  .learn-more {
+    height: auto;
+    margin-top: 32px;
+    padding: 15px 20px;
+
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .stage {
+    width: 610px;
+  }
+}
+
+@media (width >= 1200px) {
+  .slide {
+    flex-direction: row-reverse;
+    gap: 24px;
+    align-items: stretch;
+    justify-content: space-between;
+
+    max-width: 1440px;
+    height: 613px;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 0 min(130px, 9.03vw) 0 min(68px, 4.72vw);
+  }
+
+  .text {
+    align-items: flex-end;
+
+    max-width: 556px;
+    margin-bottom: 0;
+    padding: 212px 0 0;
+
+    text-align: right;
+  }
+
+  .stage {
+    align-self: flex-end;
+  }
+}

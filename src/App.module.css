@@ -1,3 +1,23 @@
-.main {
-  display: block;
+.visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(50%);
+  border: 0;
+}
+
+@media (width >= 1200px) {
+  .main {
+    display: grid;
+    align-content: center;
+    min-height: 100vh;
+  }
 }

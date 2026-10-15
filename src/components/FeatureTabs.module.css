@@ -1,0 +1,118 @@
+.tablist {
+  scrollbar-width: none;
+
+  overflow-x: auto;
+  display: flex;
+
+  background-color: #fff;
+  box-shadow: inset 0 -1px rgb(0 0 0 / 8%);
+}
+
+.tablist::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  cursor: pointer;
+
+  display: flex;
+  flex: 0 0 300px;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+
+  height: 124px;
+  padding: 0;
+
+  font: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #000;
+  white-space: nowrap;
+
+  background-color: transparent;
+  border: 0;
+}
+
+.tab + .tab {
+  border-left: 1px solid rgb(0 0 0 / 8%);
+}
+
+.tab[aria-selected='true'] {
+  color: #0b172a;
+  background-color: rgb(3 129 255 / 3%);
+}
+
+.tab:focus-visible {
+  outline: 2px solid #0381ff;
+  outline-offset: -2px;
+}
+
+.badge {
+  position: relative;
+
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+
+  width: 56px;
+  height: 56px;
+
+  border: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 50%;
+}
+
+.tab[aria-selected='true'] .badge {
+  background-color: #fff;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+
+  background-color: #666;
+
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.tab[aria-selected='true'] .icon {
+  background-color: #0381ff;
+}
+
+.ring {
+  position: absolute;
+  inset: -1px;
+  transform: scaleX(-1) rotate(-90deg);
+
+  fill: none;
+  stroke: #0381ff;
+  stroke-dasharray: 173;
+  stroke-dashoffset: 173;
+}
+
+.tab[aria-selected='true'] .ring {
+  stroke-dashoffset: 0;
+}
+
+@media (hover: hover) {
+  .tab:hover {
+    box-shadow: inset 0 0 0 1px #0381ff;
+  }
+}
+
+@media (width >= 1200px) {
+  .tablist {
+    box-shadow: none;
+  }
+}
+
+@media (width >= 1440px) {
+  .tablist {
+    display: grid;
+    grid-template-columns: repeat(4, 300px) 240px;
+    justify-content: center;
+  }
+}
