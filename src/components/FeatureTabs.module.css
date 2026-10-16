@@ -1,6 +1,7 @@
 .tablist {
   scroll-behavior: smooth;
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
 
   position: relative;
 
@@ -17,6 +18,7 @@
 
 .tab {
   cursor: pointer;
+  scroll-snap-align: center;
 
   display: flex;
   flex: 0 0 300px;

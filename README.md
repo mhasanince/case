@@ -58,6 +58,7 @@ src/
   - From 768px, the desktop type scale and the full-size illustration, still stacked.
   - From 1200px, copy and illustration side by side in a 1440px container, centered vertically on the page.
   - From 1440px, the Figma tab grid: four 300px tabs and a 240px last tab. Below that, tabs keep their 300px width and the strip scrolls horizontally, so labels never get squeezed.
+- Like the mobile video, the scrolling tab strip always comes to rest with a tab centered (mandatory center snapping, or the start or end of the strip), and selecting a tab that is only partly visible scrolls it to the center.
 - The illustration area uses the desktop design's coordinate space (610 × 483px). Every image keeps its Figma position in px, and CSS turns it into percentages, so one set of data serves every screen size.
 
 ### Assets
