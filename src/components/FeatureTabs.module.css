@@ -127,7 +127,7 @@
 @media (width >= 1440px) {
   .tablist {
     display: grid;
-    grid-template-columns: repeat(4, 300px) 240px;
+    grid-template-columns: repeat(5, 300px);
     justify-content: center;
   }
 }
