@@ -60,6 +60,7 @@ src/
   - From 1440px, the Figma tab grid: four 300px tabs and a 240px last tab. Below that, tabs keep their 300px width and the strip scrolls horizontally, so labels never get squeezed.
 - Like the mobile video, the scrolling tab strip always comes to rest with a tab centered (mandatory center snapping, or the start or end of the strip), and selecting a tab that is only partly visible scrolls it to the center.
 - Figma's description boxes have fixed heights that are shorter than their text, so its 32px gap above Learn More looks like 18–26px on desktop. The button sits 22px below the last line there, and 20px below it on mobile, as in the Sign & Stamp frame.
+- Known issue, left as is: between 768px and 1199px, where no design exists, the slide's height follows its description, so the tab bar moves by up to 64px when the slide changes. Below 768px only Advanced Filters moves it, by about 28px at 375px, as in the mobile video.
 - The illustration area uses the desktop design's coordinate space (610 × 483px). Every image keeps its Figma position in px, and CSS turns it into percentages, so one set of data serves every screen size.
 
 ### Assets
@@ -86,6 +87,7 @@ There are no timing specs, so the order and timing come from the example videos.
    - the arrow and the exported files come out from behind the tab bar, fully opaque, 215ms apart, and fan out: the arrow and the PDF up and to the left, the JPG straight up, the TXT up and to the right.
 4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts (600ms, `ease-in-out`), and the tab colors change in 225ms.
 
+- The mobile video uses the same fades and curves, but its illustrations start 0.1–0.5s later than on desktop, by a different amount on every change. That looks like images still loading in the recording, so there is no separate mobile timing.
 - Each slide remounts when it is shown, so its animation replays every time.
 - All images are preloaded on mount, and an illustration's animation stays paused until its images are decoded, so nothing animates in half-loaded.
 - Fast switching: the tab selection updates at once, the outgoing slide keeps fading, and only the last selected slide enters. Selecting the visible slide again during the fade fades it back in.
@@ -104,6 +106,7 @@ There are no timing specs, so the order and timing come from the example videos.
 - The selected tab's ring is a full circle, as in the videos. Figma shows a partially drawn arc.
 - Layers outside the visible frames, the "FastScan delivers advanced technological solutions" heading and the "Try Filters" section, are not part of the design and are not built.
 - Inconsistencies between frames are normalized: the reused "Active" tab layer, an extra underline on one selected tab, and a larger Learn More button in one mobile frame.
+- The Document Scanner frame's phone has an extra "iPhone X" frame layer, with side buttons and a dark 1px outline, that the other four frames lack. All phones are drawn without it for consistency.
 - "Learn More" has no destination in the design, so it is a button.
 
 ### Tooling
