@@ -59,6 +59,7 @@ src/
   - From 1200px, copy and illustration side by side in a 1440px container, centered vertically on the page.
   - From 1440px, the Figma tab grid: four 300px tabs and a 240px last tab. Below that, tabs keep their 300px width and the strip scrolls horizontally, so labels never get squeezed.
 - Like the mobile video, the scrolling tab strip always comes to rest with a tab centered (mandatory center snapping, or the start or end of the strip), and selecting a tab that is only partly visible scrolls it to the center.
+- Figma's description boxes have fixed heights that are shorter than their text, so its 32px gap above Learn More looks like 18–26px on desktop. The button sits 22px below the last line there, and 20px below it on mobile, as in the Sign & Stamp frame.
 - The illustration area uses the desktop design's coordinate space (610 × 483px). Every image keeps its Figma position in px, and CSS turns it into percentages, so one set of data serves every screen size.
 
 ### Assets
