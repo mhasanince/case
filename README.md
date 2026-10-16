@@ -89,7 +89,7 @@ There are no timing specs, so the order and timing come from the example videos.
 - The tabs follow the WAI-ARIA tabs pattern: roving tabindex, ArrowLeft and ArrowRight (wrapping), Home and End, automatic activation, and a panel labelled by its tab. On narrow screens the selected tab scrolls into view.
 - The DOM order matches the visual order (panel, then tabs), so keyboard focus moves top to bottom.
 - Each illustration is one `role="img"` element with a description, and the images inside it are decorative.
-- Hover outlines apply only to devices that can hover; keyboard focus has its own outline.
+- Hover outlines apply only to devices that can hover, and only to unselected tabs: as in the video, the outline fades out once a tab is clicked. Keyboard focus has its own outline.
 - Known issue: the design's eyebrow blue (#0381FF) has a 3.7:1 contrast ratio on white, below WCAG AA for 16px text. It is kept for fidelity to the design.
 
 ### Deviations from the Figma file
