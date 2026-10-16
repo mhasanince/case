@@ -64,6 +64,7 @@ src/
 
 - Phone mockups and decorations are rendered from the Figma file at 2x, trimmed and encoded as WebP, about 620 KB for all five slides. Each phone keeps only the part above the tab bar, because the rest is never visible.
 - Tab icons are single-color SVGs used as CSS masks, so their color can transition between the inactive and active states. The detailed stamp icon is a PNG mask because its SVG is about 150 KB.
+- The filter sliders are translucent, and as in Figma they blur the phone behind them with `backdrop-filter`. The blur radius is Figma's 16.94px on the 610px illustration and scales with it through container query units, so the phone's edge shows as a soft gradient on every screen size.
 
 ### Typography
 

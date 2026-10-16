@@ -30,6 +30,7 @@ export type StageImage = {
 
 export type Decoration = StageImage & {
   animation: 'pop' | 'slideUp' | 'fade' | 'fanOut';
+  frosted?: boolean;
 };
 
 export type Feature = {
@@ -137,6 +138,7 @@ export const features: ReadonlyArray<Feature> = [
         width: 43,
         height: 359,
         animation: 'fade',
+        frosted: true,
       },
       {
         src: contrastBar,
@@ -145,6 +147,7 @@ export const features: ReadonlyArray<Feature> = [
         width: 43,
         height: 359,
         animation: 'fade',
+        frosted: true,
       },
     ],
   },

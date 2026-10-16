@@ -50,7 +50,13 @@ export function FeatureSlide({ feature }: { feature: Feature }) {
           {feature.decorations.map((decoration) => (
             <img
               key={decoration.src}
-              className={`${styles.decoration} ${styles[decoration.animation]}`}
+              className={[
+                styles.decoration,
+                styles[decoration.animation],
+                decoration.frosted && styles.frosted,
+              ]
+                .filter(Boolean)
+                .join(' ')}
               src={decoration.src}
               alt=""
               width={decoration.width}

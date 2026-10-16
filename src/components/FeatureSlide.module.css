@@ -65,6 +65,7 @@
 .stage {
   position: relative;
 
+  container-type: inline-size;
   overflow: hidden;
   flex-shrink: 0;
 
@@ -148,6 +149,12 @@
 
 .fade {
   animation-name: fade-in;
+}
+
+.frosted {
+  backdrop-filter: blur(calc(16.94 / 610 * 100cqw));
+  border-radius: calc(20 / var(--width) * 100%) /
+    calc(20 / var(--height) * 100%);
 }
 
 @media (width >= 768px) {
