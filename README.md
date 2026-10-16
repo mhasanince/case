@@ -1,6 +1,6 @@
 # HubX Frontend Assignment
 
-A responsive feature showcase built from the HubX Frontend Developer Case: five tabs, each with its own copy and an animated phone illustration. It uses React 18, TypeScript and CSS Modules on the provided Vite 4 template.
+A responsive feature showcase for the HubX Frontend Developer Case, built with React 18, TypeScript and CSS Modules on the provided Vite 4 template. There are five tabs, and each one shows a short description and an animated phone illustration.
 
 ## Design
 
@@ -18,7 +18,7 @@ https://drive.google.com/drive/folders/1kkicvHG7UMc-MY9npv_fy4gW1cZF3QiO?usp=dri
 
 ## Getting started
 
-Requires Node 24 (see `.nvmrc`).
+You need Node 24 (see `.nvmrc`).
 
 ```sh
 npm ci
@@ -39,80 +39,83 @@ npm run dev
 
 ```
 src/
-  App.tsx                  Page shell with a visually hidden h1
-  features.ts              Feature copy, icons and illustration image positions
-  useImagesReady.ts        Image preloading and decode tracking
+  App.tsx                  Page shell
+  features.ts              Copy, icons and image positions for each tab
+  useImagesReady.ts        Image preloading and decoding
   components/
-    FeatureShowcase.tsx    Selection state, slide transition and tab panel
-    FeatureTabs.tsx        Accessible tab list
-    FeatureSlide.tsx       Copy and animated phone illustration
-  assets/                  Icons and WebP images exported from Figma
+    FeatureShowcase.tsx    Selected tab and slide transitions
+    FeatureTabs.tsx        Tab list
+    FeatureSlide.tsx       Copy and animated illustration
+  assets/                  Icons and images exported from Figma
 ```
 
-## Decisions
+## Notes
 
 ### Layout
 
-- The CSS is mobile-first. The design exists at 375px and 1440px, and the widths in between follow these breakpoints:
-  - Below 768px, the 375px design: content stacked and the illustration scaled to 399px wide.
-  - From 768px, the desktop type scale and the full-size illustration, still stacked.
-  - From 1200px, copy and illustration side by side in a 1440px container, centered vertically on the page.
-  - From 1440px, the Figma tab grid: four 300px tabs and a 240px last tab. Below that, tabs keep their 300px width and the strip scrolls horizontally, so labels never get squeezed.
-- Like the mobile video, the scrolling tab strip always comes to rest with a tab centered (mandatory center snapping, or the start or end of the strip), and selecting a tab that is only partly visible scrolls it to the center.
-- Figma's description boxes have fixed heights that are shorter than their text, so its 32px gap above Learn More looks like 18–26px on desktop. The button sits 22px below the last line there, and 20px below it on mobile, as in the Sign & Stamp frame.
-- Known issue, left as is: between 768px and 1199px, where no design exists, the slide's height follows its description, so the tab bar moves by up to 64px when the slide changes. Below 768px only Advanced Filters moves it, by about 28px at 375px, as in the mobile video.
-- The illustration area uses the desktop design's coordinate space (610 × 483px). Every image keeps its Figma position in px, and CSS turns it into percentages, so one set of data serves every screen size.
+- The CSS is mobile-first. The design only exists at 375px and 1440px, so the widths in between are a judgment call: stacked below 1200px, side by side from 1200px, and the full tab grid from 1440px.
+- Below 1440px the tabs scroll horizontally and snap to the center, like in the mobile video.
+- Image positions are stored in the desktop illustration's coordinates (610 × 483) and converted to percentages, so the same data works at every size.
+- Images are exported from Figma at 2x as WebP. Tab icons are CSS masks, so their color can change with the selected state.
 
-### Assets
+### Animations
 
-- Phone mockups and decorations are rendered from the Figma file at 2x, trimmed and encoded as WebP, about 620 KB for all five slides. Each phone keeps only the part above the tab bar, because the rest is never visible.
-- Tab icons are single-color SVGs used as CSS masks, so their color can transition between the inactive and active states. The detailed stamp icon is a PNG mask because its SVG is about 150 KB.
-- The filter sliders are translucent, and as in Figma they blur the phone behind them with `backdrop-filter`. The blur radius is Figma's 16.94px on the 610px illustration and scales with it through container query units, so the phone's edge shows as a soft gradient on every screen size.
-
-### Typography
-
-- The design uses SF Pro, Apple's system font, whose license does not allow embedding it on the web. The font stack resolves to SF Pro on Apple devices and to the platform's UI font elsewhere.
-- Browsers render the system font 3–10% wider than Figma does, more at small sizes, so some descriptions wrap one word earlier. The Figma type values are kept instead of tuned letter spacing that would only fit one platform.
-
-### Animation
-
-There are no timing specs, so the order and timing come from the example videos. Each element was tracked frame by frame in the 60fps desktop video and fitted to CSS easing curves. Everything is plain CSS.
-
-1. The current slide fades out in 300ms, and the next slide's copy fades in the same way (`ease`).
-2. 100ms after the copy, the phone rises from behind the tab bar in 1s (`ease`).
-3. 850ms after the copy, the decorations enter one after another, 500ms each (`ease`):
-   - the signature and stamp grow in from nothing, 150ms apart;
-   - the scanned pages slide up 375ms apart, each starting at the size of the front page and shrinking into its place in the stack;
-   - the filter sliders fade in where they stand, 150ms apart;
-   - the arrow and the exported files come out from behind the tab bar, fully opaque, 215ms apart, and fan out: the arrow and the PDF up and to the left, the JPG straight up, the TXT up and to the right.
-4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts (600ms, `ease-in-out`), and the tab colors change in 225ms.
-
-- The mobile video uses the same fades and curves, but its illustrations start 0.1–0.5s later than on desktop, by a different amount on every change. That looks like images still loading in the recording, so there is no separate mobile timing.
-- Each slide remounts when it is shown, so its animation replays every time.
-- All images are preloaded on mount, and an illustration's animation stays paused until its images are decoded, so nothing animates in half-loaded.
-- Fast switching: the tab selection updates at once, the outgoing slide keeps fading, and only the last selected slide enters. Selecting the visible slide again during the fade fades it back in.
-- With `prefers-reduced-motion`, movement turns into plain fades, the ring appears without drawing, and the tab strip scrolls without smoothing.
+- Animations are plain CSS. There is no timing spec, so the timings come from the example videos.
+- When the tab changes:
+  1. The old slide fades out and the new copy fades in.
+  2. The phone rises from behind the tab bar in about a second.
+  3. The slide's own details animate in.
+  4. Meanwhile, the ring around the selected tab draws in.
+- The animation replays every time a slide is shown, and it waits until the slide's images are decoded.
+- When you click through the tabs quickly, only the last selected slide animates in.
+- With `prefers-reduced-motion`, everything fades instead of moving.
 
 ### Accessibility
 
-- The tabs follow the WAI-ARIA tabs pattern: roving tabindex, ArrowLeft and ArrowRight (wrapping), Home and End, automatic activation, and a panel labelled by its tab. On narrow screens the selected tab scrolls into view.
-- The DOM order matches the visual order (panel, then tabs), so keyboard focus moves top to bottom.
-- Each illustration is one `role="img"` element with a description, and the images inside it are decorative.
-- Hover outlines apply only to devices that can hover, and only to unselected tabs: as in the video, the outline fades out once a tab is clicked. Keyboard focus has its own outline.
-- Known issue: the design's eyebrow blue (#0381FF) has a 3.7:1 contrast ratio on white, below WCAG AA for 16px text. It is kept for fidelity to the design.
+- The tabs follow the WAI-ARIA tabs pattern, including the arrow keys, Home and End.
+- Hover outlines only show on devices that can hover. Keyboard focus has its own outline.
+- The eyebrow blue (#0381FF) is below WCAG AA contrast on white. It's kept to match the design.
 
-### Deviations from the Figma file
+### Differences from Figma
 
-- The selected tab's ring is a full circle, as in the videos. Figma shows a partially drawn arc.
-- Layers outside the visible frames, the "FastScan delivers advanced technological solutions" heading and the "Try Filters" section, are not part of the design and are not built.
-- Inconsistencies between frames are normalized: the reused "Active" tab layer, an extra underline on one selected tab, and a larger Learn More button in one mobile frame.
-- The Document Scanner frame's phone has an extra "iPhone X" frame layer, with side buttons and a dark 1px outline, that the other four frames lack. All phones are drawn without it for consistency.
-- "Learn More" has no destination in the design, so it is a button.
+- **Font:** SF Pro can't be embedded on the web, so the page uses the system font stack. It renders a little wider than in Figma, so a few descriptions wrap one word earlier.
+- **Learn More spacing:** Figma's description boxes are shorter than their text. The gap above Learn More therefore matches how the design looks rather than the 32px set in the file.
+- **Phone mockups:** in Figma, only the desktop "Scan with Ease" mockup has side buttons and an outline. The other phones don't have them, so none of the phones here do.
+- **Inconsistent frames:** other small differences between frames, such as an extra underline on one selected tab, are normalized.
+- **Learn More link:** "Learn More" has no link in the design, so it's a button.
+
+### Known issues
+
+- **Tab bar shift:** between 768px and 1199px, where there is no design, the tab bar moves by up to 64px when the description length changes between slides. On mobile this only happens on Advanced Filters, and the example video does the same.
 
 ### Tooling
 
-- The provided ESLint, Stylelint, Prettier and TypeScript configs are unchanged. stylelint-config-standard requires kebab-case class names, so Vite exposes CSS Module classes in camelCase: `.learn-more` becomes `styles.learnMore`.
-- Autoprefixer with the `defaults` browserslist query adds vendor prefixes such as `-webkit-mask-image`.
-- Vitest 0.34, the last version that supports Vite 4, runs the tests with Testing Library and jsdom. They cover the tab semantics, keyboard navigation, slide transitions including fast switching, and image readiness.
-- husky and lint-staged lint and format staged files before each commit. GitHub Actions checks formatting, lint, tests and the build on every push.
-- The page was checked in Chromium, WebKit and Firefox at 375, 768, 1024, 1200, 1440 and 1920px.
+- **Provided configs:** ESLint, Stylelint, Prettier and TypeScript are unchanged. Stylelint requires kebab-case class names, so CSS Module classes are exposed in camelCase (`.learn-more` becomes `styles.learnMore`).
+- **Vendor prefixes:** Autoprefixer adds them, based on the `defaults` browserslist query.
+- **Tests:** they run on Vitest 0.34, the last version that supports Vite 4, with Testing Library and jsdom.
+- **Checks:** husky and lint-staged check staged files before each commit, and GitHub Actions runs the format check, lint, tests and build.
+- **Browsers:** checked in Chromium, WebKit and Firefox at 375, 768, 1024, 1200 and 1440px.
+
+### Trade-offs
+
+- **CSS instead of Motion or GSAP:** the animations are simple entrances that CSS keyframes handle well, so an animation library would only add weight.
+- **Hand-written tabs instead of Radix or React Aria:** the WAI-ARIA tabs pattern is small enough here that a library would add more than it saves.
+- **CSS Modules instead of Tailwind:** they give scoped styles without another dependency and work with the provided Stylelint config.
+- **Exported images instead of rebuilding the phone screens in HTML:** the mockups are detailed app screenshots, so images are more accurate and lighter.
+- **Natural wrapping instead of forced line breaks:** matching Figma's line breaks at every width would need extra markup for a small visual gain.
+
+## AI usage
+
+Built with Claude Code and Claude Opus 5.5. The numbers come from the session logs.
+
+| Metric          | Value                                                                                                            |
+| --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Agents          | 1 main session and 2 subagents: an independent UI and animation review, and a fix pass                           |
+| Iterations      | 3: build, review (13 findings), fixes                                                                            |
+| Prompts         | 22. The first complete version came from the initial brief                                                       |
+| First version   | About 1 hour from the brief to 13 commits                                                                        |
+| Active time     | About 5 hours over two days                                                                                      |
+| Model requests  | 741, with 793 tool calls                                                                                         |
+| Tokens          | About 149M, 98% of them re-read from the prompt cache                                                            |
+| Figma MCP calls | 7, with the results cached locally to stay within the Starter plan's monthly limit                               |
+| Verification    | Playwright checks in Chromium, WebKit and Firefox, and animation timings measured frame by frame from the videos |
