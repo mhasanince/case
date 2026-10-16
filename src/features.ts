@@ -29,7 +29,7 @@ export type StageImage = {
 };
 
 export type Decoration = StageImage & {
-  animation: 'pop' | 'slideUp' | 'floatUp' | 'revealLeft' | 'revealRight';
+  animation: 'pop' | 'slideUp' | 'floatUp' | 'fade';
 };
 
 export type Feature = {
@@ -136,7 +136,7 @@ export const features: ReadonlyArray<Feature> = [
         y: 109,
         width: 43,
         height: 359,
-        animation: 'revealLeft',
+        animation: 'fade',
       },
       {
         src: contrastBar,
@@ -144,7 +144,7 @@ export const features: ReadonlyArray<Feature> = [
         y: 109,
         width: 43,
         height: 359,
-        animation: 'revealRight',
+        animation: 'fade',
       },
     ],
   },

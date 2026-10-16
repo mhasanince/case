@@ -79,7 +79,7 @@ There are no timing specs, so the order and timing come from the example videos.
 3. 850ms after the copy, the decorations enter one after another, 500ms each (`ease`):
    - the signature and stamp grow in from nothing, 150ms apart;
    - the scanned pages slide up 375ms apart, each starting at the size of the front page and shrinking into its place in the stack;
-   - the filter sliders slide out from behind the phone, 150ms apart;
+   - the filter sliders fade in where they stand, 150ms apart;
    - the arrow pops in and the exported files float up after it, 215ms apart.
 4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts (600ms, `ease-in-out`), and the tab colors change in 225ms.
 

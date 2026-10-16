@@ -135,12 +135,8 @@
   animation-name: float-up-in;
 }
 
-.reveal-left {
-  animation-name: reveal-left-in;
-}
-
-.reveal-right {
-  animation-name: reveal-right-in;
+.fade {
+  animation-name: fade-in;
 }
 
 @media (width >= 768px) {
@@ -234,20 +230,6 @@
 @keyframes float-up-in {
   from {
     transform: translateY(40%);
-    opacity: 0;
-  }
-}
-
-@keyframes reveal-left-in {
-  from {
-    transform: translateX(60%);
-    opacity: 0;
-  }
-}
-
-@keyframes reveal-right-in {
-  from {
-    transform: translateX(-60%);
     opacity: 0;
   }
 }
