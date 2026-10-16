@@ -75,8 +75,12 @@ src/
 There are no timing specs, so the order and timing come from the example videos. Each element was tracked frame by frame in the 60fps desktop video and fitted to CSS easing curves. Everything is plain CSS.
 
 1. The current slide fades out in 300ms, and the next slide's copy fades in the same way (`ease`).
-2. The next slide's phone rises from behind the tab bar in 700ms.
-3. The decorations enter 200ms apart: the signature and stamp pop in, the scanned pages slide up into the phone, the filter sliders slide out from behind it and the exported files float up.
+2. 100ms after the copy, the phone rises from behind the tab bar in 1s (`ease`).
+3. 850ms after the copy, the decorations enter one after another, 500ms each (`ease`):
+   - the signature and stamp grow in from nothing, 150ms apart;
+   - the scanned pages slide up 375ms apart, each starting at the size of the front page and shrinking into its place in the stack;
+   - the filter sliders slide out from behind the phone, 150ms apart;
+   - the arrow pops in and the exported files float up after it, 215ms apart.
 4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts (600ms, `ease-in-out`), and the tab colors change in 225ms.
 
 - Each slide remounts when it is shown, so its animation replays every time.

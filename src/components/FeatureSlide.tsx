@@ -6,10 +6,16 @@ import type { Feature, StageImage } from '../features';
 import { useImagesReady } from '../useImagesReady';
 import styles from './FeatureSlide.module.css';
 
-type StagePosition = CSSProperties & Record<'--x' | '--y' | '--width', number>;
+type StagePosition = CSSProperties &
+  Record<'--x' | '--y' | '--width' | '--height', number>;
 
 function getStagePosition(image: StageImage): StagePosition {
-  return { '--x': image.x, '--y': image.y, '--width': image.width };
+  return {
+    '--x': image.x,
+    '--y': image.y,
+    '--width': image.width,
+    '--height': image.height,
+  };
 }
 
 export function FeatureSlide({ feature }: { feature: Feature }) {
