@@ -72,12 +72,12 @@ src/
 
 ### Animation
 
-There are no timing specs, so the order and timing come from the example videos. Everything is plain CSS.
+There are no timing specs, so the order and timing come from the example videos. Each element was tracked frame by frame in the 60fps desktop video and fitted to CSS easing curves. Everything is plain CSS.
 
-1. The current slide fades out in 300ms.
-2. The next slide's copy fades in and its phone rises from behind the tab bar in 700ms.
+1. The current slide fades out in 300ms, and the next slide's copy fades in the same way (`ease`).
+2. The next slide's phone rises from behind the tab bar in 700ms.
 3. The decorations enter 200ms apart: the signature and stamp pop in, the scanned pages slide up into the phone, the filter sliders slide out from behind it and the exported files float up.
-4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts.
+4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts (600ms, `ease-in-out`), and the tab colors change in 225ms.
 
 - Each slide remounts when it is shown, so its animation replays every time.
 - All images are preloaded on mount, and an illustration's animation stays paused until its images are decoded, so nothing animates in half-loaded.

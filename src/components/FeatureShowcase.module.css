@@ -4,7 +4,7 @@
 }
 
 .panel {
-  transition: opacity 300ms ease-out;
+  transition: opacity 300ms ease;
 }
 
 .leaving {
