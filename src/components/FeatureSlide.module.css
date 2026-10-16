@@ -98,6 +98,7 @@
 
 .decoration {
   --stagger: 150ms;
+  --to-stage-bottom: calc((483 - var(--y)) / var(--height) * 100%);
 
   animation-duration: 500ms;
   animation-timing-function: ease;
@@ -129,10 +130,20 @@
   animation-name: slide-up-in;
 }
 
-.float-up {
+.fan-out {
   --stagger: 215ms;
+  --from-x: 0;
 
-  animation-name: float-up-in;
+  animation-name: fan-out-in;
+}
+
+.fan-out:nth-child(1),
+.fan-out:nth-child(2) {
+  --from-x: 155;
+}
+
+.fan-out:nth-child(4) {
+  --from-x: -166;
 }
 
 .fade {
@@ -222,14 +233,16 @@
 
 @keyframes slide-up-in {
   from {
-    transform: translateY(calc((483 - var(--y)) / var(--height) * 100%))
+    transform: translateY(var(--to-stage-bottom))
       scale(calc(var(--start-width) / var(--width)));
   }
 }
 
-@keyframes float-up-in {
+@keyframes fan-out-in {
   from {
-    transform: translateY(40%);
-    opacity: 0;
+    transform: translate(
+      calc(var(--from-x) / var(--width) * 100%),
+      var(--to-stage-bottom)
+    );
   }
 }

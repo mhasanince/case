@@ -29,7 +29,7 @@ export type StageImage = {
 };
 
 export type Decoration = StageImage & {
-  animation: 'pop' | 'slideUp' | 'floatUp' | 'fade';
+  animation: 'pop' | 'slideUp' | 'fade' | 'fanOut';
 };
 
 export type Feature = {
@@ -163,7 +163,7 @@ export const features: ReadonlyArray<Feature> = [
         y: 413,
         width: 24.5,
         height: 33.5,
-        animation: 'pop',
+        animation: 'fanOut',
       },
       {
         src: pdfFile,
@@ -171,7 +171,7 @@ export const features: ReadonlyArray<Feature> = [
         y: 304,
         width: 160.5,
         height: 168,
-        animation: 'floatUp',
+        animation: 'fanOut',
       },
       {
         src: jpgFile,
@@ -179,7 +179,7 @@ export const features: ReadonlyArray<Feature> = [
         y: 278,
         width: 130,
         height: 156,
-        animation: 'floatUp',
+        animation: 'fanOut',
       },
       {
         src: txtFile,
@@ -187,7 +187,7 @@ export const features: ReadonlyArray<Feature> = [
         y: 299.5,
         width: 148,
         height: 181,
-        animation: 'floatUp',
+        animation: 'fanOut',
       },
     ],
   },

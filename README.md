@@ -80,7 +80,7 @@ There are no timing specs, so the order and timing come from the example videos.
    - the signature and stamp grow in from nothing, 150ms apart;
    - the scanned pages slide up 375ms apart, each starting at the size of the front page and shrinking into its place in the stack;
    - the filter sliders fade in where they stand, 150ms apart;
-   - the arrow pops in and the exported files float up after it, 215ms apart.
+   - the arrow and the exported files come out from behind the tab bar, fully opaque, 215ms apart, and fan out: the arrow and the PDF up and to the left, the JPG straight up, the TXT up and to the right.
 4. Meanwhile the selected tab's ring draws around its icon and the previous one retracts (600ms, `ease-in-out`), and the tab colors change in 225ms.
 
 - Each slide remounts when it is shown, so its animation replays every time.
